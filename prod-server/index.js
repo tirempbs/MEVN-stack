@@ -4,9 +4,12 @@ var _interopRequireDefault = require("C:\\Users\\TiremBareno-Sosna\\Development\
 
 var _express = _interopRequireDefault(require("express"));
 
+var _routes = require("./routes");
+
 // const express = require('express')
 var app = (0, _express.default)();
 var port = 3000;
+(0, _routes.registerRoutes)(app);
 app.get('/', function (req, res) {
   return res.send('Hello World!');
 });
