@@ -20,5 +20,5 @@ function setDevEnv(app) {
 
 function setProdEnv(app) {
   app.use(bodyParser.json());
-  app.use(express.static(__dirname + '/../dist'));
+  app.use(express.static(__dirname + '/../dist'))
 }
