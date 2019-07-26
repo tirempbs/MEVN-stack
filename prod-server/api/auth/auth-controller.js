@@ -15,6 +15,8 @@ var _userModel = require("../../model/user-model");
 
 var _userModel2 = (0, _interopRequireDefault2.default)(_userModel);
 
+var _authService = require("../../services/auth-service");
+
 function index(req, res) {
   var validation = validateIndex(req.body);
 
@@ -41,7 +43,10 @@ function index(req, res) {
       return res.status(401).json();
     }
 
-    return res.status(200).json();
+    var token = (0, _authService.generateJWT)(user);
+    return res.status(200).json({
+      token: token
+    });
   });
 }
 
