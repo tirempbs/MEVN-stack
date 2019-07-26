@@ -12,9 +12,12 @@ var _routes = require("./routes");
 
 var _env = require("./config/env");
 
+var _db = require("./config/db");
+
 var app = (0, _express2.default)();
 var port = 3000;
 (0, _env.setEnvironment)(app);
+(0, _db.connectToDB)();
 (0, _routes.registerRoutes)(app);
 app.get('/', function (req, res) {
   if (process.env.NODE_ENV !== 'production') {
@@ -26,5 +29,5 @@ app.get('/', function (req, res) {
   }
 });
 app.listen(port, function () {
-  console.log("Tirem's MEVN app listening on port ".concat(port, " in ") + process.env.NODE_ENV + ' mode !');
+  console.log("MEVN app listening on port ".concat(port, " in ") + process.env.NODE_ENV + ' mode !');
 });
