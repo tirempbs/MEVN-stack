@@ -52,6 +52,9 @@ export function update(req, res) {
       if (error) {
         return res.status(500).json();
       }
+      if (!task) {
+        return res.status(404).json();
+      }
       return res.status(204).json();
     });
   });
@@ -73,7 +76,7 @@ export function remove(req, res) {
     }
     Task.deleteOne({ _id: req.params.id }, error => {
       if (error) {
-        return res.status(500).json()''
+        return res.status(500).json();
       }
       return res.status(204).json();
     });
