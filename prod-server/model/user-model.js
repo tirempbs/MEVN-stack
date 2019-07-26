@@ -14,6 +14,10 @@ var _mongoose2 = (0, _interopRequireDefault2.default)(_mongoose);
 
 var _stringUtil = require("../utilities/string-util");
 
+var _bcryptNodejs = require("bcrypt-nodejs");
+
+var _bcryptNodejs2 = (0, _interopRequireDefault2.default)(_bcryptNodejs);
+
 var userSchema = new _mongoose2.default.Schema({
   username: String,
   first: String,
@@ -32,6 +36,8 @@ userSchema.pre('save', function (next) {
   this.username = this.username.toLowerCase();
   this.first = this.first.toLowerCase();
   this.last = this.last.toLowerCase();
+  var unsafePassword = this.password;
+  this.password = _bcryptNodejs2.default.hashSync(unsafePassword);
   next();
 });
 exports.default = _mongoose2.default.model('user', userSchema);
