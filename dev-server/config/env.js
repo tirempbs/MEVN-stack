@@ -14,6 +14,7 @@ export function setEnvironment(app) {
 function setDevEnv(app) {
   process.env.NODE_ENV = 'development';
   process.env.DB_URL = 'mongodb://localhost:27017/vue-db';
+  process.env.TOKEN_SECRET = 'tMIBfatd&tGf13';
   app.use(bodyParser.json());
   app.use(morgan('dev'));
   app.use(cors());
@@ -21,6 +22,7 @@ function setDevEnv(app) {
 
 function setProdEnv(app) {
   process.env.DB_URL = 'mongodb://localhost:27017/prod-db';
+  process.env.TOKEN_SECRET = 'tMIBfatd&tGf13';
   app.use(bodyParser.json());
   app.use(express.static(__dirname + '/../dist'))
 }
