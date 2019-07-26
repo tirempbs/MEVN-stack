@@ -3,8 +3,10 @@ const app = express();
 const port = 3000;
 import { registerRoutes } from './routes';
 import { setEnvironment } from './config/env';
+import { connectToDB } from './config/db';
 
 setEnvironment(app);
+connectToDB();
 registerRoutes(app);
 
 app.get('/', (req, res) => {
@@ -16,5 +18,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Tirem's MEVN app listening on port ${port} in ` + process.env.NODE_ENV + ' mode !')
+  console.log(`MEVN app listening on port ${port} in ` + process.env.NODE_ENV + ' mode !')
 });
