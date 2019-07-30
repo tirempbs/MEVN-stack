@@ -2,6 +2,8 @@
 
 var _interopRequireDefault3 = require("C:\\Users\\TiremBareno-Sosna\\Development\\mevn-stack\\node_modules\\@babel\\runtime-corejs2/helpers/interopRequireDefault");
 
+var _interopRequireWildcard2 = _interopRequireDefault3(require("C:\\Users\\TiremBareno-Sosna\\Development\\mevn-stack\\node_modules\\@babel\\runtime-corejs2/helpers/esm/interopRequireWildcard"));
+
 var _interopRequireDefault2 = _interopRequireDefault3(require("C:\\Users\\TiremBareno-Sosna\\Development\\mevn-stack\\node_modules\\@babel\\runtime-corejs2/helpers/esm/interopRequireDefault"));
 
 Object.defineProperty(exports, "__esModule", {
@@ -29,6 +31,10 @@ var _moment = require("moment");
 
 var _moment2 = (0, _interopRequireDefault2.default)(_moment);
 
+var _authService = require("../../services/auth-service");
+
+var auth = (0, _interopRequireWildcard2.default)(_authService);
+
 function index(req, res) {
   //Find all tasks
   _taskModel2.default.find({}, function (error, tasks) {
@@ -43,8 +49,7 @@ function index(req, res) {
 }
 
 function create(req, res) {
-  //Create a task
-  var id = 10;
+  var id = auth.getUserId(req);
 
   _userModel2.default.findOne({
     _id: id
@@ -67,8 +72,7 @@ function create(req, res) {
 }
 
 function update(req, res) {
-  //Update a task
-  var id = 10;
+  var id = auth.getUserId(req);
 
   _userModel2.default.findOne({
     _id: id
@@ -81,7 +85,7 @@ function update(req, res) {
       return res.status(404).json();
     }
 
-    var task = req.body.task;
+    var task = new _taskModel2.default(req.body.task);
     task.author = user._id;
     task.dueDate = (0, _moment2.default)(task.dueDate);
 
@@ -102,8 +106,7 @@ function update(req, res) {
 }
 
 function remove(req, res) {
-  //Delete a task
-  var id = 5;
+  var id = auth.getUserId(req);
 
   _taskModel2.default.findOne({
     _id: req.params.id
