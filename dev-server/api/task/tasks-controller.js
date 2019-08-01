@@ -1,7 +1,7 @@
 import User from '../../model/user-model';
 import Task from '../../model/task-model';
 import moment from 'moment';
-import *as auth from '../../services/auth-service';
+import * as auth from '../../services/auth-service';
 
 export function index(req, res) {
   //Find all tasks
@@ -44,7 +44,7 @@ export function update(req, res) {
     const task = new Task(req.body.task);
     task.author = user._id;
     task.dueDate = moment(task.dueDate);
-    Task.findByIdAndUpdate({ _id: task._id }, (error, task) => {
+    Task.findByIdAndUpdate({ _id: task._id }, task, error => {
       if (error) {
         return res.status(500).json();
       }
