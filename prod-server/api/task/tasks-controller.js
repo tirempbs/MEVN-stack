@@ -91,7 +91,7 @@ function update(req, res) {
 
     _taskModel2.default.findByIdAndUpdate({
       _id: task._id
-    }, function (error, task) {
+    }, task, function (error) {
       if (error) {
         return res.status(500).json();
       }
